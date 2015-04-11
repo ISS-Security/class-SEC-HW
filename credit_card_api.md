@@ -22,7 +22,7 @@ Create a new repo with the following structure, described further below:
 - `Gemfile.lock`: autocreated by `bundle install`
 - `Procfile`: what `rackup` will launch with the configurations in `config.ru`
 - `config.ru`: which file and class will the service run?
-- `README.md`: start a meaningful README describing service features
+- `README.md`: start a meaningful README describing service features, and your deployed Heroku application
 - `app.rb`: your Sinatra service should be coded in here
 
 ### 2. CreditCard and Crypto code
@@ -42,3 +42,7 @@ Create a class called `CreditCardAPI` inherited from `Sinatra::Base`. Your servi
 ### 4. Ship it!!!
 
 We don't like it when our work isn't deployed. Once your two routes work, deploy it to Heroku. Name your deployed application appropriately (more on this later).
+
+### 5. Submission
+
+Submit your Github repo. But put a link in your `README.md` to your Heroku application so we can find it and try it out!
