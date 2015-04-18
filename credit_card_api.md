@@ -46,3 +46,30 @@ We don't like it when our work isn't deployed. Once your two routes work, deploy
 ### 5. Submission
 
 Submit your Github repo. But put a link in your `README.md` to your Heroku application so we can find it and try it out!
+
+
+## B. Creating a Database
+
+Important: We will not be deploying this part of your project. So please work in a git branch called `sqlite` and push that to github. Individual members should pull that branch down and branch off from there for their individual parts. We will **not** merge this with master for this part of the project. Instead, issue pull requests to `sqlite`.
+
+### 1. Sqlite
+Follow the instructions in class to create a local sqlite database called `db/dev.db`. Your table should should be called `Card` and should have all the items found in your CreditCard class.
+
+### 2. POST a new credit card
+Create a POST route that creates a new credit card on your database:
+
+- The route should be: `POST /api/v1/credit_card/new`
+- It should take HTTP body parameters:
+  - `number`: card number
+  - `owner`: name of the card owner
+  - `mediator`: credit card company (`VISA`, `Mastercard`, `American Express`, `Discover`)
+  - `expiration_date`: date the card expires in format: YYYY-MM-DD
+- If succesful, it should return status `201` for [resource created](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success)
+
+### 4. Don't Ship!
+
+We are not proud of code that saves sensitive data in an unsecured database! Let's just make sure it works locally on your own machine. We will create a safer solution next week. Remember, keep your work in a feature branch called `sqlite` but not in master.
+
+### 5. Submission
+
+Submit a link to the `sqlite` branch of your Github repo.
