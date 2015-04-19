@@ -53,14 +53,22 @@ Submit your Github repo. But put a link in your `README.md` to your Heroku appli
 Important: We will not be deploying this part of your project. So please work in a git branch called `sqlite` and push that to github. Individual members should pull that branch down and branch off from there for their individual parts. We will **not** merge this with master for this part of the project. Instead, issue pull requests to `sqlite`.
 
 ### 1. Sqlite
-Follow the instructions in class to create a local sqlite database called `db/dev.db`. Your table should should be called `Card` and should have all the items found in your CreditCard class.
+Follow the instructions in class to create a local sqlite database called `db/dev.db`. Your table should should be called `Card` and should have all the items found in your CreditCard class. Some special things to note:
 
-- CreditCard model (credit_card.rb): we will make our earlier CreditCard object into an ActiveRecord
+- Be very careful about using appropriate singular and plural name for credit cards in each of the three steps we discussed in class:
+  - Step 1: n/a
+  - Step 2:
+    - the class name of your model should be `CreditCard` and the filename should be `credit_card.rb`
+    - the name of the `db:create_migration` create task `create_credit_cards`
+  - Step 3:
+    - make sure the name of your migration file is `db/migrate/*_create_credit_cards.rb` but that the name of the migration class is `CreateCreditCards`
+    - the name of the `create_table` parameter in the `#change` method should be `:credit_cards`
+- When making the CreditCard model (step 2 of class instructions): we will make our earlier CreditCard object into an ActiveRecord
   - move `credit_card.rb` from `lib/` folder to a new `model/` folder
   - comment out the attributes (`name`, `owner`, `expiration_date`, and `credit_network`) -- we will define these in the migration file instead
   - comment out the `initialize` method -- ActiveRecord has its own initialization process that we don't want to interfere with
   - make the `CreditCard` class inherit from `ActiveRecord::Base`
-  - note: the specs you wrote earlier will fail :(  we will talk about fixing them later.
+  - note: the specs you wrote earlier will fail -- we will talk about fixing them later.
 
 ### 2. New Routes
 ####(1) Create a POST route that creates a new credit card on your database:
