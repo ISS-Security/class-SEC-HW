@@ -74,7 +74,7 @@ Follow the instructions in class to create a local sqlite database called `db/de
 ####(1) Create a POST route that creates a new credit card on your database:
 
 - The route should be: `POST /api/v1/credit_card`
-  - e.g., curl -X POST -d "{\"number\":\"5192234226081802\",\"expiration_date\":\"2017-04-19\",\"owner\":\"Cheng-Yu Hsu\",\"credit_network\":\"Visa\"}" http://127.0.0.1:9292/api/v1/credit_card
+  - e.g., `curl -X POST -d "{\"number\":\"5192234226081802\",\"expiration_date\":\"2017-04-19\",\"owner\":\"Cheng-Yu Hsu\",\"credit_network\":\"Visa\"}"` http://127.0.0.1:9292/api/v1/credit_card
 - It should take a json request body with attributes `number`, `owner`, `credit_network` and `expiration_date`
 - If the card number is not valid, halt with [HTTP status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success) 400
 - If succesful, it should return HTTP status `201` (you can simply use `status 201` to set a return status) for resource created, or else halt with `410` if there is a problem.
