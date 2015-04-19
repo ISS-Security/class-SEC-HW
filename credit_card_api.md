@@ -55,16 +55,26 @@ Important: We will not be deploying this part of your project. So please work in
 ### 1. Sqlite
 Follow the instructions in class to create a local sqlite database called `db/dev.db`. Your table should should be called `Card` and should have all the items found in your CreditCard class.
 
-### 2. POST a new credit card
-Create a POST route that creates a new credit card on your database:
+- CreditCard model (credit_card.rb): we will make our earlier CreditCard object into an ActiveRecord
+  - move `credit_card.rb` from `lib/` folder to a new `model/` folder
+  - comment out the attributes (`name`, `owner`, `expiration_date`, and `credit_network`) -- we will define these in the migration file instead
+  - comment out the `initialize` method -- ActiveRecord has its own initialization process that we don't want to interfere with
+  - make the `CreditCard` class inherit from `ActiveRecord::Base`
+  - note: the specs you wrote earlier will fail :(  we will talk about fixing them later.
 
-- The route should be: `POST /api/v1/credit_card/new`
-- It should take HTTP body parameters:
-  - `number`: card number
-  - `owner`: name of the card owner
-  - `mediator`: credit card company (`VISA`, `Mastercard`, `American Express`, `Discover`)
-  - `expiration_date`: date the card expires in format: YYYY-MM-DD
-- If succesful, it should return status `201` for [resource created](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success)
+### 2. New Routes
+####(1) Create a POST route that creates a new credit card on your database:
+
+- The route should be: `POST /api/v1/credit_card`
+  - e.g., curl -X POST -d "{\"number\":\"5192234226081802\",\"expiration_date\":\"2017-04-19\",\"owner\":\"Cheng-Yu Hsu\",\"credit_network\":\"Visa\"}" http://127.0.0.1:9292/api/v1/credit_card
+- It should take a json request body with attributes `number`, `owner`, `credit_network` and `expiration_date`
+- If the card number is not valid, halt with [HTTP status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success) 400
+- If succesful, it should return HTTP status `201` (you can simply use `status 201` to set a return status) for resource created, or else halt with `410` if there is a problem.
+
+####(b) Create a GET index route that returns all the credit cards in the database
+- Use your active record (CreditCard) to get `.all` the cards
+- Return a json array of all cards
+- Return a status of `200` if all goes well, or else `500` if there is any error
 
 ### 4. Don't Ship!
 
