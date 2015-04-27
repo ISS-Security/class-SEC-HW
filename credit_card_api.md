@@ -91,3 +91,37 @@ We are not proud of code that saves sensitive data in an unsecured database! Let
 ### 5. Submission
 
 Submit a link to the `sqlite` branch of your Github repo.
+
+
+## C. Hardening our Database
+
+Important: Please work in a git branch called `hardened_db` and push that to github. Do not merge into master quite yet.
+
+### 1. Resisting SQL Injection Attacks
+
+You currently have 3 GET/POST routes that take parameters. Make them resistant to SQL injection attacks using Query Parameterization
+
+- Do not directly pass any variables to `ActiveRecord` methods if the data came directly from user paramaters (`response.body` or `params[]`)
+- Instead, use the references from our class notes to pass in query parameters
+- If you cannot find relevant query parameters for any `ActiveRecord` methods, please discuss a solution on our Canvas website!
+
+### 2. Record-Level Encryption
+
+Our credit card numbers are currently in raw form on the database. Let's encrypt them!
+
+- Change your migration to only store `:encrypted_number` rather than `:number`
+  - also store a `:nonce`, which serves as a one-time initialization vector
+  - delete `db/schema.rb` and `db/dev.db`
+  - rerun `rake db:migrate`
+- Add getter and setter methods for `number` to your `CreditCard` model
+  - `def number=` should take a raw number, encrypt it with a key and nonce, and store it in `#encrypted_number`
+  - `def number` should decrypt the `#encrypted_number` using a key and the record's appropriate nonce
+  - you should get the key from `ENV` rather than hard-wiring it into your code
+
+### 4. Don't Ship!
+
+We will discuss setting up a better production database in class this coming week. So don't ship your code to Heroku quite yet!
+
+### 5. Submission
+
+Submit a link to the `hardened_db` branch of your Github repo.
