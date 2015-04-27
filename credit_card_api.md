@@ -117,6 +117,10 @@ Our credit card numbers are currently in raw form on the database. Let's encrypt
   - `def number=` should take a raw number, encrypt it with a key and nonce, and store it in `#encrypted_number`
   - `def number` should decrypt the `#encrypted_number` using a key and the record's appropriate nonce
   - you should get the key from `ENV` rather than hard-wiring it into your code
+- Put development key to secret file
+  - Store your encryption key in a secret `config_env.rb` file as we showed in class
+  - Use the `config_env` gem to load the secret key as an environment variable
+  - Create a sample file `config_env.rb.example` as an empty template of what the file should look like
 
 ### 4. Don't Ship!
 
