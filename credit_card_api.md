@@ -188,3 +188,6 @@ We will begin to create our first user authentication features.  Let's start wit
 ### 3. Deployment
 - Merge your work to `master` branch
 - Deploy your working project to Heroku
+
+### 4. Submission
+- Submit the URLs of your Github repo (make sure your Heroku URL is in the README)
