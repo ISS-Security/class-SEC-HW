@@ -153,3 +153,38 @@ Create tests and a production database for a real deployment!
 
 ### 4. Submission
 - Submit the URL of your Github account and the URL of your Heroku app
+
+## E. Basic User Authentication
+
+We will begin to create our first user authentication features.  Let's start with a basic login feature!
+
+### 1. Create a User model
+- Make a `User` class that is an `ActiveRecord` and create a migration for it. Attributes should include `username`, `password`, `email`, `fullname`, `address` (single line address for now), `dob` (date-of-birth)
+- Hashing and Encryption
+  - Make sure that password is salted and hashed using scrypt algorithm
+  - Make sure the full name, address, and dob are encrypted, in case our database is compromised.
+  - Can you DRY (don't-repeat-yourself) your code by creating an encrypt/decrypt method that you can reuse for the gett/setter methods of the encrypted attributes?
+- Validations
+  - Validate that all fields are given.
+  - Validate the format of the `email` however you like.
+- Authentication: create methods for `password_matches?` and `authenticate` as we saw in class.
+
+### 2. Simple Authentication
+- Create views for for:
+ - home page (describes your API)
+ - registration
+ - login
+- Create a registration page
+  - Users can create new accounts by entering all attributes of the `User` model.
+  - Redirect them to the login page when done registering.
+- Create a login feature that allows users to login using their username and password.
+  - Hold their user `id` in a session variable.
+  - Authenticate users *before* processing any route they go to.
+- Create a login bar in the layout for all pages
+  - Login bar should show registration/login/logout links *as appropriate*
+  - Allow non-logged in users to register/login (but not logout).
+  - Allow logged in users to logout (but not register/login).
+
+### 3. Deployment
+- Merge your work to `master` branch
+- Deploy your working project to Heroku
