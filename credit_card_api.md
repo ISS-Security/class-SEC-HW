@@ -129,3 +129,27 @@ We will discuss setting up a better production database in class this coming wee
 ### 5. Submission
 
 Submit a link to the `hardened_db` branch of your Github repo.
+
+## D. Deploying a Production Database
+
+Create tests and a production database for a real deployment!
+
+### 1. Write tests
+- Write at least two Minitest specs for each route that takes input
+  - A happy path: test that valid input is take and proper output and status is returned
+  - A sad path: test that invalid input returns an appropriate error status
+- Create a rake task (e.g., `rake spec`) that can be run from the command line to execute all your tests
+
+### 2. Use PostgreSQL as your Production Database
+- Configure your API service for a Postgres database when deployed in production
+- Add the Postgres addon to your Heroku service
+- Add your database encryption key to Heroku's environment
+
+### 3. Deployment
+- Make sure to put details of your API in your README.md
+- Merge your work to `master` branch this time!
+- Make sure your tests work one more time (`rake spec`)!
+- Deploy your master branch to Heroku!
+
+### 4. Submission
+- Submit the URL of your Github account and the URL of your Heroku app
