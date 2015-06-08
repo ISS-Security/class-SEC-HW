@@ -36,3 +36,47 @@ We will start this phase of our application development by adding TLS security a
 - Deploy both your credit card API and your credit card user application on Heroku
 ### 4. Submission
   - Submit the URLs of both repos on Canvas
+
+
+## B. API Keys and Authorization
+
+Recall that last time we split our service into two parts: a web app with user authentication, and a RESTful API. This time we will integrate our web app and API into a combined service architecture with authorization.
+
+### 1. Modify your credit card API service to handle user IDs
+- Add a `user_id` column to your API's database
+  - See the slide titled 'API User Trail' in our class handout to see how to reset a Postgres table and migrate again
+  - Note: if you configure `tux` and `hirb` gems to be available to all environments in your Gemfile, you can access your Postgres database using `heroku run tux` from the command line
+- Modify two earlier routes you made for your API service:
+  - POST to `/api/v1/credit_card?user_id=#` should create a new credit card with the `user_id` value (#) in its own column of the database entry
+  - GET `/api/v1/credit_card?user_id=#` should only return credit cards for user with specified (#) id from credit card database
+
+### 2. Require user authorization for web app views
+Note: Ignore JWT authorization for this part (we will do it next step)
+- In your credit card web app, create two new views only for logged in users:
+  - create a new credit card: take required user input and create new credit card for that user
+  - view all credit cards: show a table with all credit cards created by that user
+  - views should talk to the API service (`HTTParty` requests) to create/retrieve credit cards
+- Make sure both views require user to be logged in (see 'User Authorization' slide from class handout)
+  - user id number of `@current_user` for POST and GET requests to API service.
+
+### 3. Require JWT based authorization between web app and API services
+- Create private/public RSA keypair for web app
+  - store web app's private and public keys as `config_env` variables for web app
+  - store web app's public key only as `config_env` variable for API
+- Authorize requests to API
+  - Web app should send RSA-signed JWT in `authorization` header of HTTP POST/GET requests to API
+  - API should validate HTTP requests
+    - Make sure JWT in `HTTP_AUTHORIZATION` header of HTTP request is RSA-signed by web app
+    - Make sure that user's id number in `sub` of payload matches the `?user_id=` parameter of HTTP request
+    - Return 401 error if either condition fails
+
+### 4. Validate that API works with authorization
+- Make sure that web app can be used to create and view records from API only when logged in
+- Make sure that you can access API (POST/GET) using command line `curl` using correct `authorization` header
+
+### 5. Deployment
+- Make sure both repos are on master branch when you are ready to deploy
+- Deploy both your credit card API and your credit card web app on Heroku
+
+### 6. Submission
+  - Submit the URLs of both repos on Canvas
