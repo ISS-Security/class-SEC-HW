@@ -80,3 +80,34 @@ Note: Ignore JWT authorization for this part (we will do it next step)
 
 ### 6. Submission
   - Submit the URLs of both repos on Canvas
+
+
+## C. Single-Sign-On Using Github OAuth
+
+### 1. Register a 'Developer Application' on Github
+(refer to class notes on AOauth for week 15)
+- Step A of Oauth: Register a developer application on Github
+- Set your application name and server URL
+  - For development purposes, you may use http://localhost:9292 as your server
+  - Change the server to your Web App's heroku server for production
+- Choose a callback URL for your Web App
+### 2. Create a 'Login with Github' option for your Web App
+- Put a 'Login with Github' link on your login view
+  - Set the link to point to Github's `login/auth` URL
+  - Set the `client_id` attribute of the link to what Github provided you
+  - Set the `scope` attribute of the link to `user:email`
+### 3. Create callback routes
+- Make a `/callback` route for your Web App where Github can return users
+- POST your your `client_id` and `client_secret` to Github's `login/auth` URL to get an `access_token`
+- GET the user's information from Github (`login` and `email`)
+### 4. Github Single-Sign-On
+- If user's Github `login` doesn't exist in your database, make a new user using `login` as username and `email`
+- You may put anything you want as a new password (Github user will never know it)
+- Login user using their new username and email
+- For this assignment, you do not have to worry about email/login collision with prior accounts
+### 5. Validate and Deploy
+- Make sure your can login with your Github account
+- Change your Github developer application to point to your Heroku Web App before deployment
+- Deploy both your new credit card Web App (no changes to API)
+### 6. Submission
+  - Submit the URLs of both repos on Canvas
